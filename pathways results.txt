@@ -1,0 +1,65 @@
+Testing 96 parameter combinations...
+New best error: 0.001669 for config: SystemConfig(N=25, T=4, dt=0.8, V0=0.8, g=0.15, noise=0.005, phase_precision=5)
+
+Scaling Complete for N=25: Best Error=0.001669, Gap Uniformity=0.060437
+Best Config=SystemConfig(N=25, T=4, dt=0.8, V0=0.8, g=0.15, noise=0.005, phase_precision=5)
+
+Testing 96 parameter combinations...
+New best error: 0.000343 for config: SystemConfig(N=50, T=4, dt=0.8, V0=0.8, g=0.15, noise=0.005, phase_precision=5)
+New best error: 0.000336 for config: SystemConfig(N=50, T=4, dt=0.8, V0=1.0, g=0.15, noise=0.005, phase_precision=5)
+
+Scaling Complete for N=50: Best Error=0.000336, Gap Uniformity=0.037127
+Best Config=SystemConfig(N=50, T=4, dt=0.8, V0=1.0, g=0.15, noise=0.005, phase_precision=5)
+
+Testing 96 parameter combinations...
+New best error: 0.000109 for config: SystemConfig(N=100, T=4, dt=0.8, V0=0.8, g=0.15, noise=0.005, phase_precision=5)
+New best error: 0.000090 for config: SystemConfig(N=100, T=4, dt=0.8, V0=1.0, g=0.15, noise=0.005, phase_precision=5)
+
+Scaling Complete for N=100: Best Error=0.000090, Gap Uniformity=0.017858
+Best Config=SystemConfig(N=100, T=4, dt=0.8, V0=1.0, g=0.15, noise=0.005, phase_precision=5)
+
+Testing 96 parameter combinations...
+New best error: 0.000024 for config: SystemConfig(N=200, T=4, dt=0.8, V0=0.8, g=0.15, noise=0.005, phase_precision=5)
+
+Scaling Complete for N=200: Best Error=0.000024, Gap Uniformity=0.006813
+Best Config=SystemConfig(N=200, T=4, dt=0.8, V0=0.8, g=0.15, noise=0.005, phase_precision=5)
+
+
+Scaling Results:
+N=25, Best Error=0.001669, Gap Uniformity=0.060437
+N=50, Best Error=0.000336, Gap Uniformity=0.037127
+N=100, Best Error=0.000090, Gap Uniformity=0.017858
+N=200, Best Error=0.000024, Gap Uniformity=0.006813
+PS C:\Clients\Coding\Claude Engineer\retro> & C:/Users/tonyb/AppData/Local/Programs/Python/Python312/python.exe "c:/Clients/Coding/Claude Engineer/retro/quantum wave quasicrystal pathways better proof 5 removing the qpe misnames.py"
+Testing 96 parameter combinations...
+New best error: 0.001663 for config: SystemConfig(N=25, T=4, dt=0.8, V0=0.8, g=0.15, noise=0.005, phase_precision=5)
+
+Scaling Complete for N=25: Best Error=0.001663, Gap Uniformity=0.060280
+Best Config=SystemConfig(N=25, T=4, dt=0.8, V0=0.8, g=0.15, noise=0.005, phase_precision=5)
+
+Testing 96 parameter combinations...
+New best error: 0.000387 for config: SystemConfig(N=50, T=4, dt=0.8, V0=0.8, g=0.15, noise=0.005, phase_precision=5)
+New best error: 0.000376 for config: SystemConfig(N=50, T=4, dt=0.8, V0=1.0, g=0.15, noise=0.005, phase_precision=5)
+
+Scaling Complete for N=50: Best Error=0.000376, Gap Uniformity=0.038462
+Best Config=SystemConfig(N=50, T=4, dt=0.8, V0=1.0, g=0.15, noise=0.005, phase_precision=5)
+
+Testing 96 parameter combinations...
+New best error: 0.000087 for config: SystemConfig(N=100, T=4, dt=0.8, V0=0.8, g=0.15, noise=0.005, phase_precision=5)
+
+Scaling Complete for N=100: Best Error=0.000087, Gap Uniformity=0.014104
+Best Config=SystemConfig(N=100, T=4, dt=0.8, V0=0.8, g=0.15, noise=0.005, phase_precision=5)
+
+Testing 96 parameter combinations...
+New best error: 0.000029 for config: SystemConfig(N=200, T=4, dt=0.8, V0=0.8, g=0.15, noise=0.005, phase_precision=5)
+New best error: 0.000027 for config: SystemConfig(N=200, T=4, dt=0.8, V0=1.0, g=0.15, noise=0.005, phase_precision=5)
+
+Scaling Complete for N=200: Best Error=0.000027, Gap Uniformity=0.008952
+Best Config=SystemConfig(N=200, T=4, dt=0.8, V0=1.0, g=0.15, noise=0.005, phase_precision=5)
+
+
+Scaling Results:
+N=25, Best Error=0.001663, Gap Uniformity=0.060280
+N=50, Best Error=0.000376, Gap Uniformity=0.038462
+N=100, Best Error=0.000087, Gap Uniformity=0.014104
+N=200, Best Error=0.000027, Gap Uniformity=0.008952
