@@ -89,6 +89,8 @@ Figure 1 and Table 1 illustrate the unexpected exponential decrease in total err
 | 100   | 0.000089 | 0.014179      |
 | 200   | 0.000025 | 0.006941      |
 
+![chart results1](https://github.com/user-attachments/assets/44e171d2-7591-4c36-8df7-fa955831135a)
+
 ### 3.2 Gap Uniformity and Error Correlation
 Analyzing the energy spectrum of each Hamiltonian shows that more uniform energy gaps correlate strongly with lower errors. This suggests the system avoids degenerate states or near-resonances that typically amplify phase errors.
 
