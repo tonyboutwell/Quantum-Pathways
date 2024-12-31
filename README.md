@@ -71,34 +71,34 @@ $$
 This procedure applies a small phase shift to each component of the wavefunction, re-centering the global phase profile without the measurement-based steps characteristic of full Quantum Phase Estimation.
 
 ### 2.4 Noise Modeling
-
 Dynamic noise is applied at each timestep during forward and backward evolution. Two key models are used:
-
 1. **Depolarizing Noise**:
-   $$
-   \rho \to (1-p)\rho + \frac{p}{d}I
-   $$
-   where \( p \) is the depolarizing probability and \( d \) is the system dimension.
+   $\rho \to (1-p)\rho + \frac{p}{d}I$
+   
+   where $p$ is the depolarizing probability and $d$ is the system dimension.
 
 2. **Amplitude Damping Noise**:
-   $$
-   \rho \to E_0 \rho E_0^\dagger + E_1 \rho E_1^\dagger
-   $$
 
-   with:
-   $$
-   E_0 =
-   \begin{bmatrix}
-   1 & 0 \\
-   0 & \sqrt{1-\gamma}
-   \end{bmatrix}, \quad
-   E_1 =
-   \begin{bmatrix}
-   0 & \sqrt{\gamma} \\
-   0 & 0
-   \end{bmatrix}
-   $$
-   and \( \gamma \) is the damping rate.
+$$\rho \to E_0 \rho E_0^\dagger + E_1 \rho E_1^\dagger$$
+
+where:
+
+$$
+E_0 = \begin{pmatrix}
+1 & 0 \\
+0 & \sqrt{1-\gamma}
+\end{pmatrix}
+$$
+
+$$
+E_1 = \begin{pmatrix}
+0 & \sqrt{\gamma} \\
+0 & 0
+\end{pmatrix}
+$$
+
+and $\gamma$ is the damping rate.
+
 
 ### 2.5 Error Metric
 
@@ -120,12 +120,12 @@ $$
 
 Figure 1 and Table 1 illustrate the unexpected exponential decrease in total error for \$N=25\$, 50, 100, and 200. At \$N=200\$, the error reaches \$\sim8.3\times10^{-4}\$, indicating near-perfect reconstruction in our simulations.
 
-| \$N\$ | Error    | Gap Uniformity |
-| ----- | -------- | -------------- |
-| 25    | 0.002903 | 0.061745       |
-| 50    | 0.001228 | 0.031341       |
-| 100   | 0.000993 | 0.020526       |
-| 200   | 0.000834 | 0.009875       |
+| \$N\$ | Error    |
+| ----- | -------- | 
+| 25    | 0.002100 | 
+| 50    | 0.000306 |
+| 100   | 0.000068 | 
+| 200   | 0.000030 | 
 
 ### 3.2 Gap Uniformity and Error Correlation
 
