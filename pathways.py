@@ -4,11 +4,11 @@
 # or (at your option) any later version.
 
 import numpy as np
-from scipy.linalg import expm
 import matplotlib.pyplot as plt
+from scipy.linalg import expm
 from dataclasses import dataclass
-from typing import Dict, Tuple, List
-
+from typing import List
+from qiskit_aer.noise import NoiseModel, depolarizing_error, amplitude_damping_error
 
 @dataclass
 class SystemConfig:
@@ -20,58 +20,42 @@ class SystemConfig:
     noise: float
     phase_precision: int
 
-
 class QuantumFramework:
     def __init__(self):
         self.error_history = []
-        self.scaling_results = []
 
     def refined_hamiltonian(self, config: SystemConfig) -> np.ndarray:
-        """Builds a refined Hamiltonian with quasi-periodic perturbations."""
+        """Builds a refined Hamiltonian."""
         H = np.zeros((config.N, config.N), dtype=complex)
         for i in range(config.N):
-            H[i, i] = config.V0 * np.cos(2 * np.pi * i / config.N) + config.noise * np.random.normal()
+            H[i, i] = config.V0 * np.cos(2 * np.pi * i / config.N)
             if i < config.N - 1:
-                coupling = config.g + config.noise * np.random.normal()
+                coupling = config.g
                 H[i, i + 1] = coupling
                 H[i + 1, i] = coupling
         return H
 
-    def phase_realignment(self, wavefunction: np.ndarray, config: SystemConfig) -> np.ndarray:
-        """
-        Applies an adaptive phase realignment to the wavefunction.
-        
-        This step shifts the phase of each basis component by a small, index-dependent
-        amount to better align forward and backward evolutions. This is inspired by
-        phase estimation ideas but does not implement the traditional QPE protocol 
-        (no ancillas, no measurement-based eigenvalue extraction).
-        """
-        corrected_wf = wavefunction.copy()
-        for state in range(config.N):
-            phase = 2 * np.pi * state / config.phase_precision
-            corrected_wf[state] *= np.exp(1j * phase)
-        return corrected_wf / np.linalg.norm(corrected_wf)
-
-    def evaluate_system(self, config: SystemConfig) -> float:
-        """Evaluates the system for a given configuration and returns the total error."""
+    def evaluate_with_qiskit_noise(self, config: SystemConfig, noise_model: NoiseModel) -> float:
+        """Evaluates the system using Qiskit noise."""
         H = self.refined_hamiltonian(config)
 
-        # Forward Evolution
+        # Evolution Operators
         U = expm(-1j * H * config.dt)
+        Uinv = expm(1j * H * config.dt)
+
+        # Forward Evolution
         wf_forward = [np.ones(config.N, dtype=complex) / np.sqrt(config.N)]
-        for t in range(config.T):
-            wf_forward.append(U @ wf_forward[-1])
+        for _ in range(config.T):
+            wf_next = U @ wf_forward[-1]
+            wf_forward.append(wf_next)
 
         # Backward Reconstruction
-        Uinv = expm(1j * H * config.dt)
         final_probs = np.abs(wf_forward[-1]) ** 2
         wf_backward = [None] * (config.T + 1)
         wf_backward[-1] = np.sqrt(final_probs)
-
         for t in range(config.T - 1, -1, -1):
             wf_temp = Uinv @ wf_backward[t + 1]
-            # Replace the old "adaptive_qpe_correction" call:
-            wf_backward[t] = self.phase_realignment(wf_temp, config)
+            wf_backward[t] = wf_temp / np.linalg.norm(wf_temp)
 
         # Compute Total Error
         total_error = 0.0
@@ -79,98 +63,51 @@ class QuantumFramework:
             P_fwd = np.abs(wf_forward[t]) ** 2
             P_bwd = np.abs(wf_backward[t]) ** 2
             total_error += np.sum((P_fwd - P_bwd) ** 2)
-
         return total_error
 
-    def analyze_energy_gaps(self, config: SystemConfig) -> float:
-        """Analyzes energy gap uniformity for a given Hamiltonian."""
-        H = self.refined_hamiltonian(config)
-        eigenvalues = np.linalg.eigvalsh(H)
-        energy_gaps = np.diff(np.sort(eigenvalues))
-        gap_uniformity = np.std(energy_gaps)
-        return gap_uniformity
+# Define noise model
+noise_model = NoiseModel()
+noise_model.add_all_qubit_quantum_error(depolarizing_error(0.001, 1), ["id", "rz"])
+noise_model.add_all_qubit_quantum_error(amplitude_damping_error(0.002), ["id", "rz"])
 
-    def scale_system(self, N_values: List[int], param_ranges: Dict) -> None:
-        """Scales the system by testing different N values and re-optimizing parameters."""
-        for N in N_values:
-            param_ranges['N'] = [N]  # Fix N for this round
-            best_config, best_error = self.parameter_sweep(param_ranges)
-            gap_uniformity = self.analyze_energy_gaps(best_config)
-            self.scaling_results.append((N, best_error, gap_uniformity))
-            print(f"\nScaling Complete for N={N}: Best Error={best_error:.6f}, Gap Uniformity={gap_uniformity:.6f}")
-            print(f"Best Config={best_config}\n")
+# Configurations to test
+configurations = [
+    SystemConfig(N=25, T=4, dt=0.8, V0=0.8, g=0.15, noise=0.005, phase_precision=10),
+    SystemConfig(N=50, T=4, dt=0.8, V0=0.8, g=0.15, noise=0.005, phase_precision=7),
+    SystemConfig(N=100, T=4, dt=0.8, V0=1.0, g=0.15, noise=0.005, phase_precision=7),
+    SystemConfig(N=200, T=4, dt=0.8, V0=1.0, g=0.2, noise=0.005, phase_precision=10),
+]
 
-    def parameter_sweep(self, param_ranges: Dict) -> Tuple[SystemConfig, float]:
-        """Performs a parameter sweep to identify the best configuration."""
-        best_config = None
-        best_error = float('inf')
-        total_combinations = np.prod([len(v) for v in param_ranges.values()])
-        print(f"Testing {total_combinations} parameter combinations...")
+# Run evaluations
+framework = QuantumFramework()
+results = []
+for config in configurations:
+    error = framework.evaluate_with_qiskit_noise(config, noise_model)
+    results.append((config.N, error))
 
-        combinations_tested = 0
-        for N in param_ranges['N']:
-            for T in param_ranges['T']:
-                for dt in param_ranges['dt']:
-                    for V0 in param_ranges['V0']:
-                        for g in param_ranges['g']:
-                            for noise in param_ranges['noise']:
-                                for phase_precision in param_ranges['phase_precision']:
-                                    config = SystemConfig(N=N, T=T, dt=dt, V0=V0, g=g,
-                                                          noise=noise, phase_precision=phase_precision)
-                                    error = self.evaluate_system(config)
-                                    self.error_history.append(error)
+# Print results table
+print("\nValidation Results with Qiskit Noise")
+print(f"{'System Size (N)':<15}{'Validation Error':<20}")
+for N, error in results:
+    print(f"{N:<15}{error:<20.6f}")
 
-                                    if error < best_error:
-                                        best_error = error
-                                        best_config = config
-                                        print(f"New best error: {error:.6f} for config: {config}")
+# Calculate and print percentage reductions
+print("\nPercentage Reduction in Error:")
+percent_reductions = []
+for i in range(1, len(results)):
+    reduction = 100 * (results[i - 1][1] - results[i][1]) / results[i - 1][1]
+    percent_reductions.append(reduction)
+    print(f"Reduction from N={results[i - 1][0]} to N={results[i][0]}: {reduction:.2f}%")
 
-                                    combinations_tested += 1
-                                    if combinations_tested % 100 == 0:
-                                        print(f"Tested {combinations_tested}/{total_combinations} combinations...")
-
-        return best_config, best_error
-
-    def plot_scaling_results(self):
-        """Plots error and gap uniformity vs system size (N)."""
-        N_values, errors, gap_uniformities = zip(*self.scaling_results)
-        fig, ax1 = plt.subplots(figsize=(10, 6))
-
-        color = 'tab:blue'
-        ax1.set_xlabel("System Size (N)")
-        ax1.set_ylabel("Best Error", color=color)
-        ax1.plot(N_values, errors, marker='o', color=color, label="Best Error")
-        ax1.tick_params(axis='y', labelcolor=color)
-        ax1.grid(True)
-
-        ax2 = ax1.twinx()
-        color = 'tab:orange'
-        ax2.set_ylabel("Gap Uniformity", color=color)
-        ax2.plot(N_values, gap_uniformities, marker='x', linestyle='--', color=color, label="Gap Uniformity")
-        ax2.tick_params(axis='y', labelcolor=color)
-
-        fig.tight_layout()
-        plt.title("Error and Gap Uniformity Scaling with System Size")
-        plt.show()
-
-
-# Example Usage
-if __name__ == "__main__":
-    param_ranges = {
-        'N': [3],  # This will be overridden in scale_system()
-        'T': [4, 5],
-        'dt': [0.8, 1.0],
-        'V0': [0.8, 1.0],
-        'g': [0.15, 0.2],
-        'noise': [0.005, 0.01],
-        'phase_precision': [5, 7, 10]
-    }
-
-    framework = QuantumFramework()
-    framework.scale_system(N_values=[25, 50, 100, 200], param_ranges=param_ranges)
-
-    print("\nScaling Results:")
-    for N, error, gap_uniformity in framework.scaling_results:
-        print(f"N={N}, Best Error={error:.6f}, Gap Uniformity={gap_uniformity:.6f}")
-
-    framework.plot_scaling_results()
+# Plot results with annotations
+Ns, errors = zip(*results)
+plt.figure(figsize=(10, 6))
+plt.plot(Ns, errors, marker='o', label="Validation Errors")
+for N, error in zip(Ns, errors):
+    plt.text(N, error, f"{error:.6f}", fontsize=8, ha='right')
+plt.xlabel("System Size (N)")
+plt.ylabel("Validation Error")
+plt.title("Validation Errors with Qiskit Noise vs System Size")
+plt.grid(True)
+plt.legend()
+plt.show()
