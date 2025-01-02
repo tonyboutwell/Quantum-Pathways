@@ -42,7 +42,7 @@ where:
 Empirical tuning yields the following angles for optimal coherence:
 
 
- ### $\alpha \approx 2.3074, \beta \approx 1.3934, \gamma \approx -0.9259, \phi \approx 1.7644, r_z \approx 0.0003, r_y \approx 2.5472$
+### $\alpha \approx 2.3074, \beta \approx 1.3934, \gamma \approx -0.9259, \phi \approx 1.7644, r_z \approx 0.0003, r_y \approx 2.5472$
 ##
 #### 2.3 Evolution Operator
 ### $U_{bracketed} = B(\alpha)G B(\beta) G B(\gamma),$
@@ -57,11 +57,7 @@ where:
 
 Our mechanism relies on an approximate five-fold symmetry in phase alignment:
 
-$$
-\\Delta\\phi = \\frac{2\\pi}{5}\\,n + \\delta, 
-\\quad n \\in \\{0,1,2,3,4\\},
-\\quad |\\delta| < 0.1.
-$$
+### $\\Delta\\phi = \\frac{2\\pi}{5}\\,n + \\delta,\quad n \\in \\{0,1,2,3,4\\},\quad |\\delta| < 0.1.$
 
 Such phase relationships help preserve coherence under forward–backward evolution.
 
@@ -74,13 +70,8 @@ Such phase relationships help preserve coherence under forward–backward evolut
 Under simulation, we observe:
 
 1. **Population Distribution**  
-   \\(
-     |00\\rangle: 0.499989, \\quad
-     |01\\rangle: 0.000011, \\quad
-     |10\\rangle: 0.000011, \\quad
-     |11\\rangle: 0.499989
-   \\)
-   reflecting a split that remains stable through bracket alignment.
+   - ### $\|00\\rangle: 0.499989, \quad |01\\rangle: 0.000011, \quad |10\\rangle: 0.000011, \quad |11\\rangle: 0.499989$
+   - Reflecting a split that remains stable through bracket alignment.
 
 2. **Phase Evolution**  
    - Controlled phase shifts at each bracket sub-step  
@@ -88,7 +79,7 @@ Under simulation, we observe:
    - Negligible phase drift or decoherence
 
 3. **Fidelity**  
-   - Final fidelity \\(\\approx 0.999958\\)  
+   - Final fidelity $\approx 0.999958$  
    - Minimal state mixing  
    - Perfect (or near-perfect) population symmetry at concluding step
 ##
@@ -96,15 +87,12 @@ Under simulation, we observe:
 
 The data strongly indicates “quantum highways” in phase space:
 
-- **Exact Population Balance**  
-  \\(\\{|00\\rangle, |11\\rangle\\}\\) remain at \\(\\sim 0.499989\\), while \\(\\{|01\\rangle, |10\\rangle\\}\\) are \\(\\sim 0.000011\\).  
+1. **Exact Population Balance**
+   - ### $|00\rangle, |11\rangle \text{ remain at } \sim 0.499989, \text{ while } |01\rangle, |10\rangle \text{ are } \sim 0.000011.$ 
 
-- **Phase-Space Structure**  
-  \\(
-    \\Delta \\phi \\in
-    \\{\\,0.0000,\\;0.6000,\\;3.0500,\\;3.2300,\\;3.6500\\},
-  \\)
-  each representing a distinct bracket-induced alignment region.
+2. **Phase-Space Structure**  
+   - ### $\Delta \phi \\in \\{0.0000, 0.6000, 3.0500, 3.2300, 3.6500\\},$
+   - Each representing a distinct bracket-induced alignment region.
 
 ##
 
@@ -114,9 +102,9 @@ The data strongly indicates “quantum highways” in phase space:
 
 The near-perfect fidelity arises from:
 
-1. **Bracket-induced phase locking**  
-2. **Five-fold symmetric wavefunction**  
-3. **Geometric confinement** in phase space
+1. Bracket-induced phase locking  
+2. Five-fold symmetric wavefunction 
+3. Geometric confinement in phase space
 ##
 #### 4.2 Quantum Highways
 
@@ -125,8 +113,7 @@ We propose that these stable “highways” in phase space:
 1. Maintain symmetric populations  
 2. Protect relative phases from decoherence  
 3. Enable reversibility and time-symmetric evolution  
-4. Revert the system to near-initial states with fidelity \\(\\sim 1.0\\)
-
+4. Revert the system to near-initial states with fidelity $\sim 1.0$
 ##
 
 ### 5. Discussion
@@ -165,10 +152,12 @@ def bracketed_operation(alpha, beta, gamma, phase, rz, ry):
 - Wavefunction tracking and intermediate step measurement  
 - Phase difference analysis via bracket gates  
 - Probability distribution capture at forward/backward boundaries  
-- Fidelity vs. known target states (e.g., \\(|\\Phi^+\\rangle\\))
+- Fidelity vs. known target states (eg., $|\Phi^+\rangle)$
 
 ##
 
 ### 7. Conclusion
 
-We introduce a bracket-based quantum protection method that achieves near-perfect fidelity through geometric phase alignment, as demonstrated by bracket parameters \\(\\{\\alpha=2.3074,\\;\\beta=1.3934,\\;\\gamma=-0.9259,\\;\\phi=1.7644,\\;r_z=0.0003,\\;r_y=2.5472\\}\\). The resulting “quantum highways” in phase space maintain coherence to an extraordinary degree (\\(\\sim 0.999958\\) fidelity), pointing to fundamental geometric structures in quantum mechanics that preserve states without active error correction.
+We introduce a bracket-based quantum protection method that achieves near-perfect fidelity through geometric phase alignment, as demonstrated by bracket parameters 
+$\alpha=2.3074,\ \beta=1.3934,\ \gamma=-0.9259,\ \phi=1.7644,\ r_z=0.0003,\ r_y=2.5472$. 
+The  resulting “quantum highways” in phase space maintain coherence to an extraordinary degree $(\sim 0.999958 \text{ fidelity})$, pointing to fundamental geometric structures in quantum mechanics that preserve states without active error correction.
