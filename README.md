@@ -2,7 +2,13 @@
 
 ## Abstract
 
-We report the discovery of a quantum protection mechanism that achieves near-perfect fidelity (~0.999958) through precisely calibrated bracket gates. By enforcing geometric phase alignment among bracket parameters {α=2.3074,β=1.3934,γ=−0.9259}, our method demonstrates exceptionally high coherence preservation in simulation. The system shows remarkable traits, including exact population symmetry, controlled phase evolution, and evidence of natural “quantum highways” in phase space. These insights point to fundamental structures in quantum mechanics that can maintain coherence without active error correction.
+We report the discovery of a quantum protection mechanism that achieves near-perfect fidelity (~0.999958) through precisely calibrated bracket gates. By enforcing geometric phase alignment among bracket parameters:
+
+$$
+\{\alpha \approx 2.3074, \beta \approx 1.3934, \gamma \approx -0.9259\}
+$$
+
+our method demonstrates exceptionally high coherence preservation in simulation. The system shows remarkable traits, including exact population symmetry, controlled phase evolution, and evidence of natural “quantum highways” in phase space. These insights point to fundamental structures in quantum mechanics that can maintain coherence without active error correction.
 
 
 ---
@@ -15,8 +21,8 @@ Quantum state preservation typically relies on active error correction or dynami
 
 ### 1.2 Key Findings
 
-1. **Near-perfect fidelity** (\\(\\sim 0.999958\\)) via geometric phase alignment  
-2. **Exact population symmetry** maintained (\\(0.499989/0.000011\\))  
+1. **Near-perfect fidelity** (∼0.999958) via geometric phase alignment  
+2. **Exact population symmetry** maintained (0.499989/0.000011)
 3. **Controlled phase evolution** through bracket-induced pathways  
 4. **Evidence of “quantum highways”** where phase coherence remains robust
 
@@ -45,14 +51,14 @@ $$
 Empirical tuning yields the following angles for optimal coherence:
 
 $$
-\\begin{aligned}
-\\alpha &\\approx 2.3074, \\\\
-\\beta &\\approx 1.3934, \\\\
-\\gamma &\\approx -0.9259, \\\\
-\\phi &\\approx 1.7644, \\\\
-r_z &\\approx 0.0003, \\\\
-r_y &\\approx 2.5472.
-\\end{aligned}
+\begin{aligned}
+\alpha & \approx 2.3074, \\
+\beta & \approx 1.3934, \\
+\gamma & \approx -0.9259, \\
+\phi & \approx 1.7644, \\
+r_z & \approx 0.0003, \\
+r_y & \approx 2.5472.
+\end{aligned}
 $$
 
 ### 2.3 Evolution Operator
