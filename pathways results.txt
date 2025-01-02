@@ -1,9 +1,0 @@
-Validation Results with Qiskit Noise
-System Size (N)Validation Error    
-25             0.002100
-50             0.000306
-100            0.000068
-200            0.000030
-
-Percentage Reduction in Error:
-Reduction from N=25 to N=50: 85.43%
