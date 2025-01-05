@@ -21,7 +21,7 @@ Quantum state preservation typically relies on active error correction or dynami
 1. **Near-perfect fidelity** (∼0.999958) via geometric phase alignment  
 2. **Exact population symmetry** maintained (0.499989/0.000011)
 3. **Controlled phase evolution** through bracket-induced pathways  
-4. **Evidence of “quantum highways”** where phase coherence remains robust
+4. **Evidence of “quantum highways”** evidence of "quantum highways" where phase coherence remains robust, enabling approximate time-reversal of the system's evolution.
 5. We also demonstrate that multiple distinct parameter sets can yield the same near-perfect protection, hinting at a deeper symmetry.
 
 ##
@@ -93,7 +93,7 @@ The data strongly indicates “quantum highways” in phase space:
 
 2. **Phase-Space Structure**  
    - ### $\Delta \phi \\in \\{0.0000, 0.6000, 3.0500, 3.2300, 3.6500\\},$
-   - Each representing a distinct bracket-induced alignment region.
+   - Each representing a distinct bracket-induced alignment region that locks the wavefunction into a high-coherence trajectory. The consistency and lack of noise or errors in these phase relationships suggest that time-reversal of the evolution should be achievable.
 
 #### 3.3 Additional Trials and Multiple Solutions
 
@@ -123,8 +123,8 @@ We propose that these stable “highways” in phase space:
 
 1. Maintain symmetric populations  
 2. Protect relative phases from decoherence  
-3. Enable reversibility and time-symmetric evolution  
-4. Revert the system to near-initial states with fidelity $\sim 1.0$
+3. Enable reversibility and approximate time-symmetric evolution 
+4. Revert the system to near-initial states with fidelity $\sim 1.0$. The ability to traverse these highways in both directions, facilitated by the geometric phase alignment, is key to achieving this time-reversal property. 
 ##
 
 ### 5. Discussion
@@ -134,14 +134,16 @@ We propose that these stable “highways” in phase space:
 1. Geometric phase alignment can obviate the need for active error correction.  
 2. Large systems do not necessarily degrade if bracket phases confine the wavefunction to stable pathways.  
 3. Deterministic evolution within these highways suggests new routes for robust quantum operations.
-4. Multiple solutions found via random trials confirm the bracket approach is not a one-off phenomenon but rather emerges from deeper symmetries in the parameter space.
+4. The observed approximate time-reversibility highlights the potential for creating closed-loop quantum systems, where operations can be undone with high fidelity.
+5. Multiple solutions found via random trials confirm the bracket approach is not a one-off phenomenon but rather emerges from deeper symmetries in the parameter space.
 ##
 #### 5.2 Practical Potential
 
 1. **Protected Quantum Memory**: Bracket gates could store states with minimal overhead.  
 2. **Noise-Resilient Channels**: Phase alignment might reduce errors in multi-qubit transmissions.  
-3. **Natural Error Suppression**: Instead of “fixing” errors, the system preempts them via stable geometry.  
-4. **Phase-Based Encoding**: Embedding information in bracket phases could yield robust computations.
+3. **Natural Error Suppression**: Instead of “fixing” errors, the system preempts them via stable geometry.
+4. **Error Correction**: Time reversal could potentially be used as a component of a larger error correction scheme. For example, one could reverse the evolution, measure the error, then apply corrections before running forward. 
+5. **Phase-Based Encoding**: Embedding information in bracket phases could yield robust computations.
 
 ##
 
@@ -172,4 +174,4 @@ def bracketed_operation(alpha, beta, gamma, phase, rz, ry):
 
 We introduce a bracket-based quantum protection method that achieves near-perfect fidelity through geometric phase alignment, as demonstrated by bracket parameters
 $\alpha=2.3074,\ \beta=1.3934,\ \gamma=-0.9259,\ \phi=1.7644,\ r_z=0.0003,\ r_y=2.5472$. 
-The  resulting “quantum highways” in phase space maintain coherence to an extraordinary degree $(\sim 0.999958 \text{ fidelity})$, pointing to fundamental geometric structures in quantum mechanics that preserve states without active error correction. Recent random-parameter trials further confirm the existence of a family of bracket solutions with perfect fidelity, underscoring the robust nature of these highways and the underlying symmetries.
+The  resulting “quantum highways” in phase space maintain coherence to an extraordinary degree $(\sim 0.999958 \text{ fidelity})$, enable approximate time-reversal of the system's evolution, and point to fundamental geometric structures in quantum mechanics that preserve states without active error correction. Recent random-parameter trials further confirm the existence of a family of bracket solutions with perfect fidelity, underscoring the robust nature of these highways and the underlying symmetries.
