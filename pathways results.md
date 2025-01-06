@@ -25,4 +25,5 @@ After RY 2     : Fidelity=0.804146±0.000085, Phase=0.014799
 After gamma    : Fidelity=0.999958±0.000001, Phase=0.014814
 
 ![probability_evolution](https://github.com/user-attachments/assets/3397ce50-374f-41db-8cbd-0d986aa534d9)
-![quantum_evolution](https://github.com/user-attachments/assets/3346f2ee-4599-4a65-a459-feb41d4c1d51)
+![quantum_evolution_updated](https://github.com/user-attachments/assets/d966a499-0406-4468-9361-9139e8e1b4d6)
+
